@@ -1,28 +1,32 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="main-app">
+    <h3>{{title}}</h3>
+    <font-awesome-icon icon="plus" /> Add Boba Rating
+    <boba-rating-list v-bind:bobaRatings="bobaRatings" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import axios from "axios";
+import BobaRatingList from "./components/BobaRatingList";
 
 export default {
-  name: 'app',
+  name: 'MainApp',
+  data: function() {
+    return {
+      title: "BobaRater",
+      bobaRatings: []
+    }
+  },
   components: {
-    HelloWorld
+    FontAwesomeIcon,
+    BobaRatingList
+  },
+  mounted() {
+    axios
+    .get("./data/bobadata.json")
+    .then(response => (this.bobaRatings = response.data));
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
