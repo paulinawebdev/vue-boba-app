@@ -1,28 +1,58 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="main-app">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 col-12">
+          <div class="d-flex w-100 py-4 justify-content-between align-items-center">
+            <h3>{{title}}</h3>
+            <button class="btn btn-info"><font-awesome-icon icon="plus" /> Add Boba Rating</button>
+          </div>
+          <boba-rating-list v-bind:bobaRatings="bobaRatings" @remove="removeItem" @edit="editItem" />
+        </div>
+      </div>  
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+/* eslint-disable */
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import axios from "axios";
+import _ from "lodash";
+import BobaRatingList from "./components/BobaRatingList";
 
 export default {
-  name: 'app',
+  name: 'MainApp',
+  data: function() {
+    return {
+      title: "BobaRater",
+      bobaRatings: [],
+      rateIndex: 0
+    }
+  },
   components: {
-    HelloWorld
+    FontAwesomeIcon,
+    BobaRatingList
+  },
+  mounted() {
+    axios
+    .get("./data/bobadata.json")
+    .then(response => (this.bobaRatings = response.data.map(item => {
+      item.rateId = this.rateIndex;
+      this.rateIndex++;
+      return item;
+    })));
+  },
+  methods: {
+    removeItem: function(bobaItem) {
+      this.bobaRatings = _.without(this.bobaRatings, bobaItem);
+    },
+    editItem: function(id, field, text) {
+      const rateIndex = _.findIndex(this.bobaRatings, {
+        rateId: id
+      });
+      this.bobaRatings[rateIndex][field] = text;
+    }
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
