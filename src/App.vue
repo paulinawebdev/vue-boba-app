@@ -1,14 +1,24 @@
 <template>
   <div id="main-app">
-    <h3>{{title}}</h3>
-    <font-awesome-icon icon="plus" /> Add Boba Rating
-    <boba-rating-list v-bind:bobaRatings="bobaRatings" />
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 col-12">
+          <div class="d-flex w-100 py-4 justify-content-between align-items-center">
+            <h3>{{title}}</h3>
+            <button class="btn btn-info"><font-awesome-icon icon="plus" /> Add Boba Rating</button>
+          </div>
+          <boba-rating-list v-bind:bobaRatings="bobaRatings" @remove="removeItem" @edit="editItem" />
+        </div>
+      </div>  
+    </div>
   </div>
 </template>
 
 <script>
+/* eslint-disable */
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import axios from "axios";
+import _ from "lodash";
 import BobaRatingList from "./components/BobaRatingList";
 
 export default {
@@ -16,7 +26,8 @@ export default {
   data: function() {
     return {
       title: "BobaRater",
-      bobaRatings: []
+      bobaRatings: [],
+      rateIndex: 0
     }
   },
   components: {
@@ -26,7 +37,22 @@ export default {
   mounted() {
     axios
     .get("./data/bobadata.json")
-    .then(response => (this.bobaRatings = response.data));
+    .then(response => (this.bobaRatings = response.data.map(item => {
+      item.rateId = this.rateIndex;
+      this.rateIndex++;
+      return item;
+    })));
+  },
+  methods: {
+    removeItem: function(bobaItem) {
+      this.bobaRatings = _.without(this.bobaRatings, bobaItem);
+    },
+    editItem: function(id, field, text) {
+      const rateIndex = _.findIndex(this.bobaRatings, {
+        rateId: id
+      });
+      this.bobaRatings[rateIndex][field] = text;
+    }
   }
 }
 </script>
