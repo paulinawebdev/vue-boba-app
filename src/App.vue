@@ -5,8 +5,9 @@
         <div class="col-lg-8 col-md-10 col-12">
           <div class="d-flex w-100 py-4 justify-content-between align-items-center">
             <h3>{{title}}</h3>
-            <button class="btn btn-info"><font-awesome-icon icon="plus" /> Add Boba Rating</button>
+            <!-- <button class="btn btn-info"><font-awesome-icon icon="plus" /> Add Boba Rating</button> -->
           </div>
+          <add-rating @add="addItem" />
           <boba-rating-list v-bind:bobaRatings="bobaRatings" @remove="removeItem" @edit="editItem" />
         </div>
       </div>  
@@ -17,6 +18,7 @@
 <script>
 /* eslint-disable */
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import AddRating from "./components/AddRating";
 import axios from "axios";
 import _ from "lodash";
 import BobaRatingList from "./components/BobaRatingList";
@@ -32,7 +34,8 @@ export default {
   },
   components: {
     FontAwesomeIcon,
-    BobaRatingList
+    BobaRatingList,
+    AddRating
   },
   mounted() {
     axios
@@ -52,6 +55,16 @@ export default {
         rateId: id
       });
       this.bobaRatings[rateIndex][field] = text;
+    },
+    addItem: function(rating) {
+      var d = new Date();
+      var month = d.getMonth() + 1;
+      var date = d.getDate();
+      var year = d.getFullYear();
+      rating.ratingId = this.rateIndex;
+      rating.rateDate = month + "/" + date + "/" + year;
+      this.rateIndex++;
+      this.bobaRatings.push(rating);
     }
   }
 }

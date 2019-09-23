@@ -1,0 +1,10 @@
+.card-header {
+    cursor: pointer;
+}
+.rating-location {
+    font-size: .6em;
+    font-weight: normal
+}
+.col-form-label.form-label {
+    font-size: .9rem;
+}

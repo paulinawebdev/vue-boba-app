@@ -1,30 +1,30 @@
 [
     {
         "storeName": "Omomo",
-        "storeCity": "Irvine",
+        "storeLocation": "Irvine",
         "author": "Bob",
-        "rateDate": "2017-07-24 08:30",
-        "notes": "it's pretty cool to see OMOMO grow over time. They definitely exploded after opening in Irvine."
+        "rateDate": "1/10/19",
+        "review": "it's pretty cool to see OMOMO grow over time. They definitely exploded after opening in Irvine."
     },
     {
         "storeName": "OneZo",
-        "storeCity": "Westminster",
+        "storeLocation": "Westminster",
         "author": "Joe",
-        "rateDate": "2017-07-22 15:50",
-        "notes": "I've heard many good things about this place and finally gave it a try. I had the brown sugar boba there and 0 regrets!"
+        "rateDate": "2/5/19",
+        "review": "I've heard many good things about this place and finally gave it a try. I had the brown sugar boba there and 0 regrets!"
     },
     {
         "storeName": "Cha for Tea",
-        "storeCity": "Long Beach",
+        "storeLocation": "Long Beach",
         "author": "Jill",
-        "rateDate": "2017-07-21 9:15",
-        "notes": "This is the best boba tea place I have ever been to, and I've tried a lot of places. Iced black almond milk tea and crispy chicken (spicy with the sweet and sour) is perfect."
+        "rateDate": "2/20/19",
+        "review": "This is the best boba tea place I have ever been to, and I've tried a lot of places. Iced black almond milk tea and crispy chicken (spicy with the sweet and sour) is perfect."
     },
     {
         "storeName": "Tastea",
-        "storeCity": "Artesia",
+        "storeLocation": "Artesia",
         "author": "jan",
-        "rateDate": "2017-07-20 15:30",
-        "notes": "This is probably my the best boba shop. I always order Moo Juice. Sometimes I get Karate chicken."
+        "rateDate": "4/20/19",
+        "review": "This is probably my the best boba shop. I always order Moo Juice. Sometimes I get Karate chicken."
     }
 ]
